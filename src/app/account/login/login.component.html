@@ -1,1 +1,94 @@
-<p>login works!</p>
+<div class="container mt-4" id="container">
+	<div class="form-container sign-up-container">
+		<form [formGroup]="registerForm" (ngSubmit)="RegisterUser()">
+			<div class="containItemsForm">
+				<input type="text"
+				[class.is-invalid]="registerForm.get('firstName')?.invalid&&registerForm.get('firstName')?.touched"
+				formControlName="firstName" placeholder="FirstName" />
+			<div *ngIf="registerForm.get('firstName')?.errors?.['required']&&registerForm.get('firstName')?.touched" class="invalid-feedback"
+				style="text-align: left !important;">FirstName is Required</div>
+			<input type="text"
+				[class.is-invalid]="registerForm.get('lastName')?.invalid&&registerForm.get('lastName')?.touched"
+				formControlName="lastName" placeholder="LastName" />
+			<div *ngIf="registerForm.get('lastName')?.errors?.['required']&&registerForm.get('lastName')?.touched" class="invalid-feedback"
+				style="text-align: left !important;">lastName is Required</div>
+			<input type="email"
+				[class.is-invalid]="registerForm.get('email')?.invalid&&registerForm.get('email')?.touched"
+				formControlName="email" placeholder="Email" />
+			<div *ngIf="registerForm.get('email')?.errors?.['required']&&registerForm.get('email')?.touched" class="invalid-feedback"
+				style="text-align: left !important;">Email is Required</div>
+				<div *ngIf="registerForm.get('email')?.errors?.['email']&&registerForm.get('email')?.touched" class="invalid-feedback"
+				style="text-align: left !important;">not format email</div>
+			<input type="password"
+				[class.is-invalid]="registerForm.get('password')?.invalid&&registerForm.get('password')?.touched"
+				formControlName="password" placeholder="Password" />
+				<div  class="invalid-feedback" style="text-align: left !important;"  *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.touched">
+					<div *ngIf="registerForm.get('password')?.hasError('required')">Password is required</div>
+					<div *ngIf="registerForm.get('password')?.hasError('uppercase')">Password must contain at least one uppercase letter</div>
+					<div *ngIf="registerForm.get('password')?.hasError('number')">Password must contain at least one number</div>
+					<div *ngIf="registerForm.get('password')?.hasError('specialChar')">Password must contain at least one special character</div>
+					<div *ngIf="registerForm.get('password')?.hasError('minLength')">Password must be at least 8 characters long</div>
+				  </div>
+			<input type="phone"
+				[class.is-invalid]="registerForm.get('phone')?.invalid&&registerForm.get('phone')?.touched"
+				formControlName="phone" placeholder="phone number" />
+			<div *ngIf="registerForm.get('phone')?.errors&&registerForm.get('phone')?.touched" class="invalid-feedback"
+				style="text-align: left !important;">
+				<div *ngIf="registerForm.get('phone')?.hasError('required')">Phone number is required</div>
+				<div *ngIf="registerForm.get('phone')?.hasError('egyptianPhoneNumber')">Invalid Egyptian phone number</div>
+			</div>
+				
+				
+			
+			<input type="file"
+			accept="image/*"
+			(change)="onFileChange($event)"
+				[class.is-invalid]="registerForm.get('image')?.invalid&&registerForm.get('image')?.touched"
+				formControlName="file" placeholder="image" />
+			<div *ngIf="registerForm.get('image')?.errors?.['required']&&registerForm.get('image')?.touched" class="invalid-feedback"
+				style="text-align: left !important;">photo is Required</div>
+			</div>
+			<button class="mb-4">Sign Up</button>
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+			<h1>Sign in</h1>
+			<div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+			<span>or use your account</span>
+			<input [class.is-invalid]="loginForm.get('email')?.invalid&&loginForm.get('email')?.touched" type="email"
+				formControlName="email" placeholder="Email" />
+			<div *ngIf="loginForm.get('email')?.errors?.['required']&&loginForm.get('email')?.touched" class="invalid-feedback"
+				style="text-align: left !important;">Email is Required</div>
+			<div *ngIf="loginForm.get('email')?.errors?.['email']&&loginForm.get('email')?.touched" class="invalid-feedback"
+				style="text-align: left !important;">not format email</div>
+				<input type="password"
+				[class.is-invalid]="loginForm.get('password')?.invalid&&loginForm.get('password')?.touched"
+				formControlName="password" placeholder="Password" />
+
+			<div *ngIf="loginForm.get('password')?.errors?.['required']&&loginForm.get('password')?.touched" class="invalid-feedback"
+				style="text-align: left !important;">Password is Required</div>
+			<a href="#">Forgot your password?</a>
+			<button>Sign In</button>
+		</form>
+	</div>
+	
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your personal details and start journey with us</p>
+				<button class="ghost" id="signUp">Sign Up</button>
+			</div>
+		</div>
+	</div>
+</div>

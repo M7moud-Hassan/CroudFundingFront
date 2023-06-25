@@ -1,4 +1,4 @@
 export const environment = {
-    baseUrl:'https://salmajed.taiba-soft.com/api',
+    baseUrl:'http://localhost:5266/Api/',
   };
   
