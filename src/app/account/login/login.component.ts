@@ -38,8 +38,14 @@ export class LoginComponent  implements AfterViewInit,OnInit {
   onSubmit(){
    if(this.loginForm.valid){
     this.accountService.login(this.loginForm.value).subscribe({
-      next:(user)=>console.log(user)
-      
+      next:(user)=> {
+        //
+      },
+      error:(error)=>{
+        if(error.error){
+          this.notification.showError(error.error._message,"login")
+        }
+      }  
     })
    }
     else{
@@ -82,7 +88,12 @@ export class LoginComponent  implements AfterViewInit,OnInit {
       next:(user)=>{
        this.notification.showSuccess("check your email to validation ","Regiteration Done")
        this.registerForm.reset();
-      }
+      },
+      error:(err) =>{
+        if(err.error){
+          this.notification.showError(err.error._message,"error in login")
+        }
+      },
      })
     }else{
      if(this.registerForm.controls.email.errors?.['required']){
